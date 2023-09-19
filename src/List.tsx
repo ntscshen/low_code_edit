@@ -1,12 +1,14 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-18 17:53:46
- * @LastEditTime: 2023-09-18 17:57:25
+ * @LastEditTime: 2023-09-18 18:15:28
  * @FilePath: /low_code/src/List.tsx
  * @Description:
  */
 // import React, { FC } from 'react';
 import type { FC } from 'react';
+import QuestionCard from './components/QuestionCard.tsx';
+import { QuestionListType } from './components/QuestionCard';
 import './List.css';
 
 const List: FC = () => {
@@ -16,30 +18,19 @@ const List: FC = () => {
     { id: 'q3', title: '问卷3', isPublished: true },
     { id: 'q4', title: '问卷4', isPublished: false },
   ];
-  const edit = (id: string) => {
-    console.log('id :>> ', id);
-  };
   return (
     <div>
       <h1>问卷列表页</h1>
       <ul>
-        {questionList.map((item) => {
+        {questionList.map((item: QuestionListType) => {
           const { id, title, isPublished } = item;
           return (
-            <li
+            <QuestionCard
               key={id}
-              className="list-item"
-            >
-              <strong>{title}</strong>
-              &nbsp;
-              {isPublished ? (
-                <span style={{ color: 'green' }}>已发布</span>
-              ) : (
-                <span>未发布</span>
-              )}
-              &nbsp;
-              <button onClick={() => edit(id)}>编辑问卷</button>
-            </li>
+              id={id}
+              title={title}
+              isPublished={isPublished}
+            />
           );
         })}
       </ul>
