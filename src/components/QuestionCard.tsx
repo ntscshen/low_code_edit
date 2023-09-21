@@ -1,11 +1,13 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-18 18:05:42
- * @LastEditTime: 2023-09-19 22:07:18
+ * @LastEditTime: 2023-09-21 21:36:10
  * @FilePath: /low_code/src/components/QuestionCard.tsx
  * @Description:
  */
 import { QuestionListType } from './QuestionCard';
+import cssModule from '../List.module.less';
+import clsx from 'clsx';
 
 const QuestionCard = (item: QuestionListType) => {
   const { id, title, isPublished, delQuestion, pubsliQuestion } = item;
@@ -19,15 +21,19 @@ const QuestionCard = (item: QuestionListType) => {
   const publish = (id: string) => {
     pubsliQuestion && pubsliQuestion(id);
   };
+  const itemClassName = clsx({
+    [cssModule['list-item']]: true,
+    [cssModule.published]: isPublished,
+  });
   return (
     <li
       key={id}
-      className="list-item"
+      className={itemClassName}
     >
       <strong>{title}</strong>
       &nbsp;
       {isPublished ? (
-        <span style={{ color: 'green' }}>已发布</span>
+        <span className={cssModule['published-span']}>已发布</span>
       ) : (
         <span>未发布</span>
       )}

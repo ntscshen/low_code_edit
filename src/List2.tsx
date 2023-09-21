@@ -1,7 +1,7 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-19 18:42:35
- * @LastEditTime: 2023-09-21 17:37:58
+ * @LastEditTime: 2023-09-21 18:21:50
  * @FilePath: /low_code/src/List2.tsx
  * @Description:
  */
@@ -56,6 +56,7 @@ const List: FC = () => {
   return (
     <div>
       <h1>问卷列表页2</h1>
+      <button onClick={add}>添加问卷</button>
       <div>{loading ? '加载中...' : info}</div>
 
       <div>
@@ -76,7 +77,6 @@ const List: FC = () => {
           );
         })}
       </ul>
-      <button onClick={add}>添加问卷</button>
     </div>
   );
 };
