@@ -1,7 +1,7 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-19 18:42:35
- * @LastEditTime: 2023-09-19 22:09:16
+ * @LastEditTime: 2023-09-21 17:37:58
  * @FilePath: /low_code/src/List2.tsx
  * @Description:
  */
@@ -9,6 +9,11 @@ import { FC, useState } from 'react';
 import QuestionCard from './components/QuestionCard.tsx';
 import { QuestionListType } from './components/QuestionCard.ts';
 import './List.css';
+
+import { useTitle, useMouse } from 'ahooks';
+// import useTitle from './hooks/useTitle.ts';
+// import useMouse from './hooks/useMouse.ts';
+import useGetInfo from './hooks/useGetInfo.ts';
 
 const List: FC = () => {
   const [questionList, setQuestionList] = useState([
@@ -44,9 +49,18 @@ const List: FC = () => {
       }),
     );
   };
+
+  useTitle('ceshi2222');
+  const mouse = useMouse();
+  const { loading, info } = useGetInfo();
   return (
     <div>
       <h1>问卷列表页2</h1>
+      <div>{loading ? '加载中...' : info}</div>
+
+      <div>
+        X:{mouse.clientX}, Y:{mouse.clientY}
+      </div>
       <ul>
         {questionList.map((item: QuestionListType) => {
           const { id, title, isPublished } = item;
