@@ -1,0 +1,5 @@
+const LOGIN_PATHNAME = '/login';
+const REGISTER_PATHNAME = '/register';
+const MANAGE_LIST_PATHNAME = '/manage/list';
+
+export { LOGIN_PATHNAME, REGISTER_PATHNAME, MANAGE_LIST_PATHNAME };
