@@ -1,16 +1,15 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-18 17:21:48
- * @LastEditTime: 2023-09-19 18:45:56
+ * @LastEditTime: 2023-09-22 17:05:33
  * @FilePath: /low_code/src/App.tsx
  * @Description:
  */
-// import List from './List';
-import List2 from './List2.tsx';
+import { RouterProvider } from 'react-router-dom';
+import routerConfig from './router';
 
 function App() {
-  // return <List />;
-  return <List2 />;
+  return <RouterProvider router={routerConfig} />;
 }
 
 export default App;

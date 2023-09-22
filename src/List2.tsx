@@ -1,13 +1,13 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-19 18:42:35
- * @LastEditTime: 2023-09-21 18:21:50
+ * @LastEditTime: 2023-09-21 22:11:42
  * @FilePath: /low_code/src/List2.tsx
  * @Description:
  */
 import { FC, useState } from 'react';
-import QuestionCard from './components/QuestionCard.tsx';
-import { QuestionListType } from './components/QuestionCard.ts';
+// import QuestionCard from './components/QuestionCard.tsx';
+// import { QuestionListType } from './components/QuestionCard.ts';
 import './List.css';
 
 import { useTitle, useMouse } from 'ahooks';
@@ -62,7 +62,7 @@ const List: FC = () => {
       <div>
         X:{mouse.clientX}, Y:{mouse.clientY}
       </div>
-      <ul>
+      {/* <ul>
         {questionList.map((item: QuestionListType) => {
           const { id, title, isPublished } = item;
           return (
@@ -76,7 +76,7 @@ const List: FC = () => {
             />
           );
         })}
-      </ul>
+      </ul> */}
     </div>
   );
 };
