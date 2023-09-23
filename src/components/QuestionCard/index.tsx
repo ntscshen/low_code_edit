@@ -1,19 +1,20 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-18 18:05:42
- * @LastEditTime: 2023-09-23 21:32:57
+ * @LastEditTime: 2023-09-23 22:12:55
  * @FilePath: /low_code/src/components/QuestionCard/index.tsx
  * @Description:
  */
 import { FC } from 'react';
 import { QuestionListType } from './index.type';
-import { Button, Space, Divider, Tag } from 'antd';
+import { Button, Space, Divider, Tag, Popconfirm, Modal, message } from 'antd';
 import {
   EditOutlined,
   LineChartOutlined,
   StarOutlined,
   CopyOutlined,
   DeleteOutlined,
+  ExclamationCircleOutlined,
 } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './index.module.less';
@@ -21,12 +22,22 @@ import {
   QUESTION_EDIT_PATHNAME,
   QUESTION_STAR_PATHNAME,
 } from '@/Utils/constant';
+const { confirm } = Modal;
 // import clsx from 'clsx';
 
 const QuestionCard: FC<QuestionListType> = (item: QuestionListType) => {
   const { id, title, isPublished, isStar, createdAt, answerCount } = item;
   const nav = useNavigate();
-
+  const duplicate = () => {
+    message.success('复制成功');
+  };
+  const del = () => {
+    confirm({
+      title: '确定要删除该问卷吗？',
+      icon: <ExclamationCircleOutlined />,
+      onOk: () => message.success('删除成功'),
+    });
+  };
   return (
     <div className={styles.container}>
       <div className={styles.title}>
@@ -88,17 +99,25 @@ const QuestionCard: FC<QuestionListType> = (item: QuestionListType) => {
             >
               {isStar ? '取消标星' : '标星'}
             </Button>
-            <Button
-              icon={<CopyOutlined />}
-              type="text"
-              size="small"
+            <Popconfirm
+              title="确定复制该问卷?"
+              okText="确定"
+              cancelText="取消"
+              onConfirm={duplicate}
             >
-              复制
-            </Button>
+              <Button
+                icon={<CopyOutlined />}
+                type="text"
+                size="small"
+              >
+                复制
+              </Button>
+            </Popconfirm>
             <Button
               icon={<DeleteOutlined />}
               type="text"
               size="small"
+              onClick={del}
             >
               删除
             </Button>

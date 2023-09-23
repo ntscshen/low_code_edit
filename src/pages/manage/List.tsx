@@ -1,8 +1,8 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-21 22:06:24
- * @LastEditTime: 2023-09-22 18:03:21
- * @FilePath: /low_code/src/pages/Manage/List.tsx
+ * @LastEditTime: 2023-09-23 22:16:16
+ * @FilePath: /low_code/src/pages/manage/List.tsx
  * @Description:
  */
 
@@ -10,6 +10,8 @@ import { FC, useState } from 'react';
 import styles from './List.module.less';
 import { useTitle } from 'ahooks';
 import QuestionCard from '@/components/QuestionCard';
+import { Typography } from 'antd';
+const { Title } = Typography;
 
 const rowQuestionList = [
   {
@@ -53,7 +55,9 @@ const List: FC = () => {
   return (
     <>
       <div className={styles.header}>
-        <div className={styles.left}>我的问卷</div>
+        <div className={styles.left}>
+          <Title level={3}>我的问卷</Title>
+        </div>
         <div className={styles.right}>（搜索）</div>
       </div>
       <div className={styles.context}>
