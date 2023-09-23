@@ -1,7 +1,7 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-22 16:14:32
- * @LastEditTime: 2023-09-22 17:15:25
+ * @LastEditTime: 2023-09-23 19:01:40
  * @FilePath: /low_code/src/router/index.tsx
  * @Description:
  */
@@ -72,7 +72,7 @@ const routerConfig = createBrowserRouter([
         element: <Edit />,
       },
       {
-        path: 'stat/:id',
+        path: 'statistics/:id',
         element: <Star />,
       },
     ],
