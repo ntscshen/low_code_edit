@@ -1,11 +1,10 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-22 16:14:32
- * @LastEditTime: 2023-09-23 19:01:40
+ * @LastEditTime: 2023-09-23 22:27:16
  * @FilePath: /low_code/src/router/index.tsx
  * @Description:
  */
-import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
 import MainLayout from '@/layouts/MainLayout';
