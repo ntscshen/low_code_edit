@@ -1,7 +1,7 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-22 15:45:58
- * @LastEditTime: 2023-09-23 22:26:55
+ * @LastEditTime: 2023-09-25 14:46:54
  * @FilePath: /low_code/src/pages/manage/star.tsx
  * @Description:
  */
@@ -18,6 +18,7 @@ import { useTitle } from 'ahooks';
 import QuestionCard from '@/components/QuestionCard';
 import styles from './List.module.less';
 import { Empty, Typography } from 'antd';
+import ListSearch from '@/components/ListSearch';
 const { Title } = Typography;
 
 const rowQuestionList = [
@@ -56,7 +57,9 @@ const Star: FC = () => {
         <div className={styles.left}>
           <Title level={3}>星标问卷</Title>
         </div>
-        <div className={styles.right}>（搜索）</div>
+        <div className={styles.right}>
+          <ListSearch />
+        </div>
       </div>
       <div className={styles.context}>
         {questionList.length === 0 && <Empty description="暂无数据" />}

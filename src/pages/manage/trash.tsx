@@ -1,7 +1,7 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-22 15:46:19
- * @LastEditTime: 2023-09-23 23:08:22
+ * @LastEditTime: 2023-09-25 14:47:18
  * @FilePath: /low_code/src/pages/manage/trash.tsx
  * @Description:
  */
@@ -19,6 +19,7 @@ import {
   message,
 } from 'antd';
 import { ExclamationCircleOutlined, StarOutlined } from '@ant-design/icons';
+import ListSearch from '@/components/ListSearch';
 const { Title } = Typography;
 const { confirm } = Modal;
 
@@ -147,7 +148,9 @@ const Trash: FC = () => {
         <div className={styles.left}>
           <Title level={3}>我的问卷</Title>
         </div>
-        <div className={styles.right}>（搜索）{JSON.stringify(selectedId)}</div>
+        <div className={styles.right}>
+          <ListSearch />
+        </div>
       </div>
       <div className={styles.context}>
         {questionList.length === 0 && <Empty description="暂无数据" />}
