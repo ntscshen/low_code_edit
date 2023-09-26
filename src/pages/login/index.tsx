@@ -1,13 +1,13 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-22 15:41:06
- * @LastEditTime: 2023-09-25 17:01:14
+ * @LastEditTime: 2023-09-26 17:13:00
  * @FilePath: /low_code/src/pages/login/index.tsx
  * @Description:
  */
 import { FC, useEffect } from 'react';
 import styles from './index.module.less';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Space, Typography, Form, Input, Button, Checkbox } from 'antd';
 import { UserAddOutlined } from '@ant-design/icons';
 import { REGISTER_PATHNAME } from '@/Utils/constant';
@@ -18,8 +18,10 @@ import {
 } from '@/Utils';
 const { Title } = Typography;
 
+import '@/_mock/index.ts';
+import axios from 'axios';
+
 const Login: FC = () => {
-  const nav = useNavigate();
   const [form] = Form.useForm();
   useEffect(() => {
     const { username, password } = getUserInfoFromStorage();
@@ -27,6 +29,10 @@ const Login: FC = () => {
       username,
       password,
     });
+  }, []);
+
+  useEffect(() => {
+    axios.get('/api/test').then((res) => console.log(res));
   }, []);
 
   const onFinish = (value: any) => {
