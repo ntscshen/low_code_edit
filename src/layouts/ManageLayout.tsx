@@ -1,13 +1,13 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-22 16:01:59
- * @LastEditTime: 2023-09-22 19:05:13
+ * @LastEditTime: 2023-09-27 17:15:48
  * @FilePath: /low_code/src/layouts/ManageLayout.tsx
  * @Description:
  */
-import { FC } from 'react';
-import { Outlet, Link, useLocation } from 'react-router-dom';
-import { Button, Space, Divider } from 'antd';
+import { FC, useState } from 'react';
+import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
+import { Button, Space, Divider, message } from 'antd';
 import {
   PlusOutlined,
   BarsOutlined,
@@ -15,10 +15,22 @@ import {
   DeleteOutlined,
 } from '@ant-design/icons';
 import styles from './ManageLayout.module.less';
+import { createQuestionService } from '@/services/question';
 
 const ManageLayout: FC = () => {
   const { pathname } = useLocation();
-  console.log('🚀 ~ file: ManageLayout.tsx:21 ~ pathname:', pathname);
+  const [loading, setLoading] = useState(false);
+  const nav = useNavigate();
+
+  const handleCreateClick = async () => {
+    setLoading(true);
+    const { id } = await createQuestionService();
+    if (id) {
+      setLoading(false);
+      nav(`/question/edit/${id}`);
+      message.success('创建成功');
+    }
+  };
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -27,6 +39,8 @@ const ManageLayout: FC = () => {
             type="primary"
             size="large"
             icon={<PlusOutlined />}
+            onClick={handleCreateClick}
+            disabled={loading}
           >
             创建问卷
           </Button>

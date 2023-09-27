@@ -1,12 +1,12 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-26 16:28:14
- * @LastEditTime: 2023-09-26 17:19:56
+ * @LastEditTime: 2023-09-27 16:57:36
  * @FilePath: /low_code/src/services/index.ts
  * @Description:
  */
 import { message } from 'antd';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 
 export type ResType = {
   errno: number;
@@ -25,9 +25,14 @@ const instance = axios.create({
 // response 拦截器 统一处理 errno 和 msg
 instance.interceptors.response.use((res) => {
   const resData = (res.data || {}) as ResType;
-  const { errno, data, msg } = resData;
+  const { errno, data } = resData;
+  console.log(
+    '🚀 ~ file: index.ts:29 ~ instance.interceptors.response.use ~ resData:',
+    data,
+  );
 
   if (errno !== 0) {
+    const msg = (data?.msg as string) || '';
     msg && message.error(msg);
     throw new Error(msg);
   }

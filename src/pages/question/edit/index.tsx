@@ -1,7 +1,7 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-22 15:48:12
- * @LastEditTime: 2023-09-26 17:28:45
+ * @LastEditTime: 2023-09-27 16:46:45
  * @FilePath: /low_code/src/pages/question/edit/index.tsx
  * @Description:
  */
@@ -11,11 +11,11 @@ import { useParams } from 'react-router-dom';
 import { getQuestionService } from '@/services/question';
 
 const Edit: FC = () => {
-  const { id } = useParams();
+  const { id = '' } = useParams();
   useEffect(() => {
     const fn = async () => {
-      const data = getQuestionService(id);
-      console.log('🚀 ~ file: index.tsx:18 ~ data ~ data:', data);
+      const data = await getQuestionService(id);
+      console.log('data :>> ', data);
     };
     fn();
   }, []);

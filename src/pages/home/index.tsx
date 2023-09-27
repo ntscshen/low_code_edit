@@ -1,11 +1,11 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-22 15:39:20
- * @LastEditTime: 2023-09-23 17:35:28
+ * @LastEditTime: 2023-09-27 16:28:02
  * @FilePath: /low_code/src/pages/home/index.tsx
  * @Description:
  */
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Button, Typography } from 'antd';
 import { MANAGE_LIST_PATHNAME } from '@/Utils/constant';
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +14,16 @@ const { Title, Paragraph } = Typography;
 
 const Home: FC = () => {
   const nav = useNavigate();
+
+  useEffect(() => {
+    // 前端port http://localhost:5173/
+    // 后端prot http://localhost:3001/
+    // 跨域了
+    fetch('/api/test')
+      .then((res) => res.json())
+      .then((data) => console.log('fetch data', data));
+  }, []);
+
   return (
     <div className={styles.container}>
       <div>
