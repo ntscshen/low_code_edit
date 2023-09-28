@@ -1,7 +1,7 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-22 15:45:58
- * @LastEditTime: 2023-09-25 14:46:54
+ * @LastEditTime: 2023-09-28 17:06:20
  * @FilePath: /low_code/src/pages/manage/star.tsx
  * @Description:
  */
@@ -17,40 +17,16 @@ import { FC, useState } from 'react';
 import { useTitle } from 'ahooks';
 import QuestionCard from '@/components/QuestionCard';
 import styles from './List.module.less';
-import { Empty, Typography } from 'antd';
+import { Empty, Spin, Typography } from 'antd';
 import ListSearch from '@/components/ListSearch';
+import useLoadQuestionListData from '@/hooks/useLoadQuestionListData';
 const { Title } = Typography;
 
-const rowQuestionList = [
-  {
-    id: 'q1',
-    title: '问卷1',
-    isPublished: false,
-    isStar: true,
-    answerCount: 5,
-    createdAt: '2023-09-21 22:35:18',
-  },
-  {
-    id: 'q2',
-    title: '问卷2',
-    isPublished: false,
-    isStar: true,
-    answerCount: 3,
-    createdAt: '2023-09-20 21:35:18',
-  },
-  {
-    id: 'q3',
-    title: '问卷3',
-    isPublished: true,
-    isStar: true,
-    answerCount: 1,
-    createdAt: '2023-09-19 20:35:18',
-  },
-];
-
 const Star: FC = () => {
-  const [questionList] = useState(rowQuestionList);
   useTitle('星标问卷');
+
+  const { data = {}, loading } = useLoadQuestionListData({ isStar: true });
+  const { list } = data;
   return (
     <>
       <div className={styles.header}>
@@ -61,19 +37,21 @@ const Star: FC = () => {
           <ListSearch />
         </div>
       </div>
-      <div className={styles.context}>
-        {questionList.length === 0 && <Empty description="暂无数据" />}
-        {questionList.length > 0 &&
-          questionList.map((item) => {
-            const { id } = item;
-            return (
-              <QuestionCard
-                key={id}
-                {...item}
-              />
-            );
-          })}
-      </div>
+      <Spin spinning={loading}>
+        <div className={styles.context}>
+          {!loading && list?.length === 0 && <Empty description="暂无数据" />}
+          {list?.length > 0 &&
+            list?.map((item: any) => {
+              const { id } = item;
+              return (
+                <QuestionCard
+                  key={id}
+                  {...item}
+                />
+              );
+            })}
+        </div>
+      </Spin>
       <div className={styles.footer}>分页</div>
     </>
   );

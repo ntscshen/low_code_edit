@@ -1,7 +1,7 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-22 15:46:19
- * @LastEditTime: 2023-09-25 14:47:18
+ * @LastEditTime: 2023-09-28 17:09:39
  * @FilePath: /low_code/src/pages/manage/trash.tsx
  * @Description:
  */
@@ -17,49 +17,19 @@ import {
   Space,
   Modal,
   message,
+  Spin,
 } from 'antd';
 import { ExclamationCircleOutlined, StarOutlined } from '@ant-design/icons';
 import ListSearch from '@/components/ListSearch';
+import useLoadQuestionListData from '@/hooks/useLoadQuestionListData';
 const { Title } = Typography;
 const { confirm } = Modal;
 
-const rowQuestionList = [
-  {
-    id: 'q1',
-    title: '问卷1',
-    isPublished: false,
-    isStar: false,
-    answerCount: 5,
-    createdAt: '2023-09-21 22:35:18',
-  },
-  {
-    id: 'q2',
-    title: '问卷2',
-    isPublished: false,
-    isStar: true,
-    answerCount: 3,
-    createdAt: '2023-09-20 21:35:18',
-  },
-  {
-    id: 'q3',
-    title: '问卷3',
-    isPublished: true,
-    isStar: false,
-    answerCount: 1,
-    createdAt: '2023-09-19 20:35:18',
-  },
-  {
-    id: 'q4',
-    title: '问卷4',
-    isPublished: false,
-    isStar: false,
-    answerCount: 4,
-    createdAt: '2023-09-19 19:35:18',
-  },
-];
-
 const Trash: FC = () => {
-  const [questionList] = useState(rowQuestionList);
+  useTitle('回收站');
+  const { loading, data } = useLoadQuestionListData({ isDeleted: true });
+  const { list } = data || {};
+
   const tableColumns = [
     {
       title: '标题',
@@ -98,8 +68,6 @@ const Trash: FC = () => {
   ];
   const [selectedId, setSelectedId] = useState<string[]>([]);
 
-  useTitle('回收站');
-
   const del = () => {
     confirm({
       title: '确定要彻底删除该问卷吗？',
@@ -128,7 +96,7 @@ const Trash: FC = () => {
         </Space>
       </div>
       <Table
-        dataSource={questionList}
+        dataSource={list}
         columns={tableColumns}
         pagination={false}
         rowKey={(q) => q.id}
@@ -152,11 +120,13 @@ const Trash: FC = () => {
           <ListSearch />
         </div>
       </div>
-      <div className={styles.context}>
-        {questionList.length === 0 && <Empty description="暂无数据" />}
+      <Spin spinning={loading}>
+        <div className={styles.context}>
+          {!loading && list?.length === 0 && <Empty description="暂无数据" />}
 
-        {questionList.length > 0 && tableElem}
-      </div>
+          {list?.length > 0 && tableElem}
+        </div>
+      </Spin>
       <div className={styles.footer}>footer</div>
     </>
   );

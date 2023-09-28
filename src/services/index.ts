@@ -1,7 +1,7 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-26 16:28:14
- * @LastEditTime: 2023-09-27 16:57:36
+ * @LastEditTime: 2023-09-28 16:57:52
  * @FilePath: /low_code/src/services/index.ts
  * @Description:
  */
@@ -15,7 +15,13 @@ export type ResType = {
 };
 
 export type ResDataType = {
-  [key: string]: unknown;
+  [key: string]: any;
+};
+
+export type SearchParams = {
+  keyword: string;
+  isStar: boolean;
+  isDeleted: boolean;
 };
 
 const instance = axios.create({

@@ -1,7 +1,7 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-22 16:01:59
- * @LastEditTime: 2023-09-27 17:15:48
+ * @LastEditTime: 2023-09-28 15:59:13
  * @FilePath: /low_code/src/layouts/ManageLayout.tsx
  * @Description:
  */
@@ -16,21 +16,34 @@ import {
 } from '@ant-design/icons';
 import styles from './ManageLayout.module.less';
 import { createQuestionService } from '@/services/question';
+import { useRequest } from 'ahooks';
 
 const ManageLayout: FC = () => {
   const { pathname } = useLocation();
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const nav = useNavigate();
 
-  const handleCreateClick = async () => {
-    setLoading(true);
-    const { id } = await createQuestionService();
-    if (id) {
-      setLoading(false);
+  // const handleCreateClick = async () => {
+  //   setLoading(true);
+  //   const { id } = await createQuestionService();
+  //   if (id) {
+  //     setLoading(false);
+  //     nav(`/question/edit/${id}`);
+  //     message.success('创建成功');
+  //   }
+  // };
+
+  const {
+    loading,
+    // error,
+    run: handleCreateClick,
+  } = useRequest(createQuestionService, {
+    manual: true,
+    onSuccess({ id }) {
       nav(`/question/edit/${id}`);
       message.success('创建成功');
-    }
-  };
+    },
+  });
   return (
     <div className={styles.container}>
       <div className={styles.left}>

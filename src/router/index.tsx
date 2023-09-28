@@ -1,7 +1,7 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-22 16:14:32
- * @LastEditTime: 2023-09-23 22:27:16
+ * @LastEditTime: 2023-09-28 14:15:51
  * @FilePath: /low_code/src/router/index.tsx
  * @Description:
  */
@@ -19,6 +19,7 @@ import List from '@/pages/manage/List';
 import Star from '@/pages/manage/star';
 import Trash from '@/pages/manage/trash';
 import Edit from '@/pages/question/edit';
+import Statistics from '@/pages/question/Statistics';
 
 // 使用 createBrowserRouter 创建路由器
 const routerConfig = createBrowserRouter([
@@ -72,7 +73,7 @@ const routerConfig = createBrowserRouter([
       },
       {
         path: 'statistics/:id',
-        element: <Star />,
+        element: <Statistics />,
       },
     ],
   },
