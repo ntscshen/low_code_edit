@@ -1,7 +1,7 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-26 16:28:14
- * @LastEditTime: 2023-09-28 16:57:52
+ * @LastEditTime: 2023-10-08 15:34:29
  * @FilePath: /low_code/src/services/index.ts
  * @Description:
  */
@@ -22,6 +22,8 @@ export type SearchParams = {
   keyword: string;
   isStar: boolean;
   isDeleted: boolean;
+  page: number;
+  pageSize: number;
 };
 
 const instance = axios.create({

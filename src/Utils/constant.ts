@@ -1,7 +1,7 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-22 23:22:50
- * @LastEditTime: 2023-09-25 16:29:30
+ * @LastEditTime: 2023-10-08 15:41:13
  * @FilePath: /low_code/src/Utils/constant.ts
  * @Description:
  */
@@ -15,6 +15,10 @@ const QUESTION_STAR_PATHNAME = '/question/statistics';
 const LIST_SEARCH_PARAM_KEY = 'keyword';
 const USERNAME_KEY = 'USERNAME';
 const PASSWORD_KEY = 'PASSWORD';
+const LIST_PAGE_PARAM_KEY = 'page';
+const LIST_PAGE_DEFAULT = 1;
+const LIST_PAGE_SIZE_PARAM_KEY = 'pageSize';
+const LIST_PAGE_SIZE_DEFAULT = 10;
 
 export {
   LOGIN_PATHNAME,
@@ -25,4 +29,8 @@ export {
   LIST_SEARCH_PARAM_KEY,
   USERNAME_KEY,
   PASSWORD_KEY,
+  LIST_PAGE_DEFAULT,
+  LIST_PAGE_PARAM_KEY,
+  LIST_PAGE_SIZE_DEFAULT,
+  LIST_PAGE_SIZE_PARAM_KEY,
 };
