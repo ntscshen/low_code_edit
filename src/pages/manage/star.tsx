@@ -1,7 +1,7 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-22 15:45:58
- * @LastEditTime: 2023-09-28 17:06:20
+ * @LastEditTime: 2023-10-08 18:09:15
  * @FilePath: /low_code/src/pages/manage/star.tsx
  * @Description:
  */
@@ -13,20 +13,21 @@
  * @Description:
  */
 
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useTitle } from 'ahooks';
 import QuestionCard from '@/components/QuestionCard';
 import styles from './List.module.less';
 import { Empty, Spin, Typography } from 'antd';
 import ListSearch from '@/components/ListSearch';
 import useLoadQuestionListData from '@/hooks/useLoadQuestionListData';
+import ListPage from '@/components/ListPage';
 const { Title } = Typography;
 
 const Star: FC = () => {
   useTitle('星标问卷');
 
   const { data = {}, loading } = useLoadQuestionListData({ isStar: true });
-  const { list } = data;
+  const { list, total = 0 } = data;
   return (
     <>
       <div className={styles.header}>
@@ -52,7 +53,9 @@ const Star: FC = () => {
             })}
         </div>
       </Spin>
-      <div className={styles.footer}>分页</div>
+      <div className={styles.footer}>
+        <ListPage total={total} />
+      </div>
     </>
   );
 };
