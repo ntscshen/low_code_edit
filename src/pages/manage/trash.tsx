@@ -1,7 +1,7 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-22 15:46:19
- * @LastEditTime: 2023-09-28 17:09:39
+ * @LastEditTime: 2023-10-08 18:35:29
  * @FilePath: /low_code/src/pages/manage/trash.tsx
  * @Description:
  */
@@ -22,13 +22,14 @@ import {
 import { ExclamationCircleOutlined, StarOutlined } from '@ant-design/icons';
 import ListSearch from '@/components/ListSearch';
 import useLoadQuestionListData from '@/hooks/useLoadQuestionListData';
+import ListPage from '@/components/ListPage';
 const { Title } = Typography;
 const { confirm } = Modal;
 
 const Trash: FC = () => {
   useTitle('回收站');
   const { loading, data } = useLoadQuestionListData({ isDeleted: true });
-  const { list } = data || {};
+  const { list, total } = data || {};
 
   const tableColumns = [
     {
@@ -127,7 +128,9 @@ const Trash: FC = () => {
           {list?.length > 0 && tableElem}
         </div>
       </Spin>
-      <div className={styles.footer}>footer</div>
+      <div className={styles.footer}>
+        <ListPage total={total} />
+      </div>
     </>
   );
 };
