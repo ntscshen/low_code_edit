@@ -1,11 +1,11 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-18 18:05:42
- * @LastEditTime: 2023-09-23 22:12:55
+ * @LastEditTime: 2023-10-09 17:52:06
  * @FilePath: /low_code/src/components/QuestionCard/index.tsx
  * @Description:
  */
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { QuestionListType } from './index.type';
 import { Button, Space, Divider, Tag, Popconfirm, Modal, message } from 'antd';
 import {
@@ -22,11 +22,27 @@ import {
   QUESTION_EDIT_PATHNAME,
   QUESTION_STAR_PATHNAME,
 } from '@/Utils/constant';
+import { updateQuestionService } from '@/services/question';
+import { useRequest } from 'ahooks';
 const { confirm } = Modal;
 // import clsx from 'clsx';
 
 const QuestionCard: FC<QuestionListType> = (item: QuestionListType) => {
   const { id, title, isPublished, isStar, createdAt, answerCount } = item;
+  // 修改标星
+  const [isStarState, setIsStarState] = useState(isStar);
+  const { loading: changeStarLoading, run: changeStar } = useRequest(
+    async () => {
+      await updateQuestionService(id, { isStar: !isStarState });
+    },
+    {
+      manual: true,
+      onSuccess() {
+        setIsStarState(!isStarState);
+        message.success('已更新');
+      },
+    },
+  );
   const nav = useNavigate();
   const duplicate = () => {
     message.success('复制成功');
@@ -50,7 +66,7 @@ const QuestionCard: FC<QuestionListType> = (item: QuestionListType) => {
             }
           >
             <Space>
-              {isStar && <StarOutlined style={{ color: 'red' }} />}
+              {isStarState && <StarOutlined style={{ color: 'red' }} />}
               {title}
             </Space>
           </Link>
@@ -96,8 +112,10 @@ const QuestionCard: FC<QuestionListType> = (item: QuestionListType) => {
               icon={<StarOutlined />}
               type="text"
               size="small"
+              onClick={changeStar}
+              disabled={changeStarLoading}
             >
-              {isStar ? '取消标星' : '标星'}
+              {isStarState ? '取消标星' : '标星'}
             </Button>
             <Popconfirm
               title="确定复制该问卷?"

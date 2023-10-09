@@ -1,7 +1,7 @@
 /*
  * @Author: ntscshen
  * @Date: 2023-09-26 17:21:54
- * @LastEditTime: 2023-09-28 16:49:09
+ * @LastEditTime: 2023-10-09 17:36:07
  * @FilePath: /low_code/src/services/question.ts
  * @Description:
  */
@@ -54,4 +54,14 @@ const getQuestionListService = async (
   return data;
 };
 
-export { getQuestionService, createQuestionService, getQuestionListService };
+// 更新单个问卷
+const updateQuestionService = async (
+  id: string,
+  opt: { [key: string]: any },
+) => {
+  const url = `/api/question/${id}`;
+  const data = (await axios.patch(url, opt)) as ResDataType;
+  return data;
+};
+
+export { getQuestionService, createQuestionService, getQuestionListService, updateQuestionService };
